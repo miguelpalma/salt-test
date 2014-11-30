@@ -1,0 +1,6 @@
+[submodule "formulas/apache-formula"]
+	path = formulas/apache-formula
+	url = https://github.com/saltstack-formulas/apache-formula.git
+[submodule "formulas/users-formula"]
+	path = formulas/users-formula
+	url = https://github.com/saltstack-formulas/users-formula.git

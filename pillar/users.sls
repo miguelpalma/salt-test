@@ -1,0 +1,3 @@
+users:
+  miguel:
+    fullname: miguel
