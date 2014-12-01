@@ -41,14 +41,21 @@ tasks.
     # …
     ```
 
-5. Optional: if you plan on wiping your VM to test your Salt tree, it would be wise to create a
+5. Optional: if you plan on contributing to this repository, set your Git name and email:
+
+    ```
+    git config user.name ${USERNAME}
+    git config user.email ${EMAIL}
+    ```
+
+6. Optional: if you plan on wiping your VM to test your Salt tree, it would be wise to create a
     snapshot of your VM now so that you will not need to go through these steps anymore.
 
-6. Place your own pillar files in directory `pillar` with the following hierarchy:
+7. Place your own pillar files in directory `pillar` with the following hierarchy:
 
   - `pillar/users.sls`: see `formulas/apache-formula/pillar.example`
 
-7. To run the Salt tree:
+8. To run the Salt tree:
 
     ```
     # This directory is a mount of the Git directory on your local machine
