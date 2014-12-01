@@ -5,12 +5,16 @@ tasks.
 
 ## Install a development/test environment
 
-1. Start a virtual environment en SSH into it (next items will assume you are logged into this box).
+1. Clone this repository **with the recursive flag** (`git clone --recursive …`) so that submodules
+    in directory `formulas` are also cloned.
+
+2. Start a virtual environment en SSH into it (next items will assume you are logged into this box).
     This Git repository contains a `Vagrantfile` that you can use by installing vagrant and then
     running:
 
     ```
-    # Downloads a image from Vagrant servers (or the one you like: https://vagrantcloud.com/discover/featured)
+    # Downloads a image from Vagrant servers (or the one you like: https://vagrantcloud.com/discover/featured
+    # event though we will refer to a Fedora 20 base image in the rest of this document)
     vagrant box add chef/fedora-20
     vagrant up
     vagrant ssh
@@ -18,9 +22,10 @@ tasks.
     yum update
     ```
 
-2. Install *salt minion*:
+3. Install *salt minion*: `yum install salt-minion`
 
-3. Edit `/etc/salt/minion` to set the following values
+4. Edit `/etc/salt/minion` to set the following values (or just copy `/vagrant/conf/etc_salt_minion`
+    to `/etc/salt/minion`)
 
     ```
     # …
@@ -36,9 +41,17 @@ tasks.
     # …
     ```
 
-4. To run the Salt tree:
+5. Optional: if you plan on wiping your VM to test your Salt tree, it would be wise to create a
+    snapshot of your VM now so that you will not need to go through these steps anymore.
+
+6. Place your own pillar files in directory `pillar` with the following hierarchy:
+
+  - `pillar/users.sls`: see `formulas/apache-formula/pillar.example`
+
+7. To run the Salt tree:
 
     ```
+    # This directory is a mount of the Git directory on your local machine
     cd /vagrant
     salt-call state.highstate
     ```
