@@ -1,5 +1,4 @@
 base:
   '*':
-    - utils
-    - users
+    - admins
     - apache
