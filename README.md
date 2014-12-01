@@ -6,6 +6,17 @@ tasks.
 ## Install a development/test environment
 
 1. Start a virtual environment en SSH into it (next items will assume you are logged into this box).
+    This Git repository contains a `Vagrantfile` that you can use by installing vagrant and then
+    running:
+
+    ```
+    # Downloads a image from Vagrant servers (or the one you like: https://vagrantcloud.com/discover/featured)
+    vagrant box add chef/fedora-20
+    vagrant up
+    vagrant ssh
+    # You should update all installed packages before you do anything else
+    yum update
+    ```
 
 2. Install *salt minion*:
 
@@ -13,12 +24,12 @@ tasks.
 
     ```
     # …
-    file_client: local
+    file_client: local    # we are going to run masterless so the minion needs to know salt states are local
     # …
-    file_roots:
+    file_roots:           # places where the minion can find salt states
       base:
         - /vagrant
-    # …
+    # …                   # 'pillars' are salt files with custom values
     pillar_roots:
       base:
         - /vagrant/pillar
@@ -39,7 +50,7 @@ cd formulas
 git submodule add ${GIT_REPO}
 # Edit /etc/salt/minion to add the following:
 file_roots:
-  - /vagrant/formulas/users-formula
+  - /vagrant/formulas/${FORMULA_REPO_NAME}
 ```
 
 ## TODO
