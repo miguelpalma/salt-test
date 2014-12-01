@@ -4,3 +4,6 @@
 [submodule "formulas/users-formula"]
 	path = formulas/users-formula
 	url = https://github.com/saltstack-formulas/users-formula.git
+[submodule "formulas/vim-formula"]
+	path = formulas/vim-formula
+	url = https://github.com/saltstack-formulas/vim-formula.git

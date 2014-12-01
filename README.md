@@ -75,5 +75,10 @@ file_roots:
 
 ## TODO
 
-- See how to automatically include formulas into top.sls
-  https://git.forgeservicelab.fi/jrodrigu/masterless-formulas/blob/e70e4e11d4c4ec1f66b1374d2335e745f4827bce/ml-wordpress/init.sls
+- See how to automatically include formulas into top.sls as explained [in here](https://git.forgeservicelab.fi/jrodrigu/masterless-formulas/blob/e70e4e11d4c4ec1f66b1374d2335e745f4827bce/ml-wordpress/init.sls)
+- See whether adding external formulas as Git submodules is a good idea as
+  [this page from official Salt doc](http://docs.saltstack.com/en/latest/topics/best_practices.html)
+  says:
+
+  > Formulas should never be referenced from the main repository, and should be forked to a repo
+  > where unintended changes will not take place.
