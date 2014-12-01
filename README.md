@@ -39,6 +39,9 @@ tasks.
       base:
         - /vagrant/pillar
     # …
+    # Optional – turn verbosity down:
+    state_verbose: False
+    state_output: terse
     ```
 
 5. Optional: if you plan on contributing to this repository, set your Git name and email:
