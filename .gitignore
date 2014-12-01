@@ -1,2 +1,3 @@
 .vagrant
-pillar/users.sls
+pillar/*
+!pillar/top.sls
