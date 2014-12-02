@@ -364,6 +364,7 @@ file_client: local
 file_roots:
   base:
     - /vagrant
+    - /vagrant/formulas/serverbase-formula
     - /vagrant/formulas/openssh-formula
     - /vagrant/formulas/vim-formula
     - /vagrant/formulas/apache-formula

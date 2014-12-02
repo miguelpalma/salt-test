@@ -10,3 +10,6 @@
 [submodule "formulas/openssh-formula"]
 	path = formulas/openssh-formula
 	url = https://github.com/saltstack-formulas/openssh-formula.git
+[submodule "formulas/serverbase-formula"]
+	path = formulas/serverbase-formula
+	url = git@github.com:miguelpalma/saltstack-serverbase-formula.git
