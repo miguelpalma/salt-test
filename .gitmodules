@@ -7,3 +7,6 @@
 [submodule "formulas/vim-formula"]
 	path = formulas/vim-formula
 	url = https://github.com/saltstack-formulas/vim-formula.git
+[submodule "formulas/openssh-formula"]
+	path = formulas/openssh-formula
+	url = https://github.com/saltstack-formulas/openssh-formula.git

@@ -6,7 +6,8 @@ tasks.
 ## Install a development/test environment
 
 1. Clone this repository **with the recursive flag** (`git clone --recursive …`) so that submodules
-    in directory `formulas` are also cloned.
+    in directory `formulas` are also cloned. If you need to individually init an already added
+    submodule, use `git submodule update --init formulas/${FORMULA_REPO_NAME}`.
 
 2. Start a virtual environment en SSH into it (next items will assume you are logged into this box).
     This Git repository contains a `Vagrantfile` that you can use by installing vagrant and then
@@ -17,15 +18,19 @@ tasks.
     # event though we will refer to a Fedora 20 base image in the rest of this document)
     vagrant box add chef/fedora-20
     vagrant up
+    # SSH into the box with one of the following:
     vagrant ssh
-    # You should update all installed packages before you do anything else
+    ssh vagrant@localhost -p 2222           # password: 'vagrant'
+    ssh vagrant@localhost -p 2222 -i ~/.vagrant.d/insecure_private_key
+    # You should update all installed packages before you do anything else:
     yum update
     ```
 
 3. Install *salt minion*: `yum install salt-minion`
 
 4. Edit `/etc/salt/minion` to set the following values (or just copy `/vagrant/conf/etc_salt_minion`
-    to `/etc/salt/minion`)
+    to `/etc/salt/minion`. Even better, remove `/etc/salt/minion` and link this path to
+    `/vagrant/conf/etc_salt_minion`)
 
     ```
     # …
@@ -56,7 +61,8 @@ tasks.
 
 7. Place your own pillar files in directory `pillar` with the following hierarchy:
 
-  - `pillar/users.sls`: see `formulas/apache-formula/pillar.example`
+  - `pillar/admins.sls`: see `formulas/apache-formula/pillar.example`
+  - `pillar/openssh.sls`: see `formulas/openssh-formula/pillar.example`
 
 8. To run the Salt tree:
 
@@ -85,3 +91,6 @@ file_roots:
 
   > Formulas should never be referenced from the main repository, and should be forked to a repo
   > where unintended changes will not take place.
+
+- Formula `openssh-formula` only allow setup of one `Port`. Patch at https://github.com/saltstack-formulas/openssh-formula/blob/master/openssh/files/sshd_config#L51  ???
+- Formula `openssh-formula` does not have `subsystem sftp …` in pillar. Patch?
