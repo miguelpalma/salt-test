@@ -363,12 +363,7 @@ file_client: local
 #
 file_roots:
   base:
-    - /vagrant
-    - /vagrant/formulas/serverbase-formula
-    - /vagrant/formulas/openssh-formula
-    - /vagrant/formulas/vim-formula
-    - /vagrant/formulas/apache-formula
-    - /vagrant/formulas/users-formula
+    - /vagrant/salt/base
 
 # By default, the Salt fileserver recurses fully into all defined environments
 # to attempt to find files. To limit this behavior so that the fileserver only
@@ -390,7 +385,9 @@ file_roots:
 # also be configured on the minion:
 pillar_roots:
   base:
-    - /vagrant/pillar
+    - /vagrant/pillar/base
+  dev:
+    - /vagrant/pillar/dev
 
 ######        Security settings       #####
 ###########################################
