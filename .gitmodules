@@ -1,15 +1,12 @@
-[submodule "formulas/apache-formula"]
-	path = formulas/apache-formula
-	url = https://github.com/saltstack-formulas/apache-formula.git
-[submodule "formulas/users-formula"]
-	path = formulas/users-formula
-	url = https://github.com/saltstack-formulas/users-formula.git
-[submodule "formulas/vim-formula"]
-	path = formulas/vim-formula
-	url = https://github.com/saltstack-formulas/vim-formula.git
-[submodule "formulas/openssh-formula"]
-	path = formulas/openssh-formula
-	url = https://github.com/saltstack-formulas/openssh-formula.git
-[submodule "formulas/serverbase-formula"]
-	path = formulas/serverbase-formula
+[submodule "salt/formula/serverbase-formula"]
+	path = salt/formula/serverbase-formula
 	url = git@github.com:miguelpalma/saltstack-serverbase-formula.git
+[submodule "salt/formula/vim-formula"]
+	path = salt/formula/vim-formula
+	url = https://github.com/saltstack-formulas/vim-formula.git
+[submodule "salt/formula/openssh-formula"]
+	path = salt/formula/openssh-formula
+	url = https://github.com/saltstack-formulas/openssh-formula.git
+[submodule "salt/formula/users-formula"]
+	path = salt/formula/users-formula
+	url = https://github.com/saltstack-formulas/users-formula.git
