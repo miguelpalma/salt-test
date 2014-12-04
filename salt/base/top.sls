@@ -1,7 +1,3 @@
-dev:
-  'dev':
-    - serverbase
-
-prod:
-  'prod':
+base:
+  '*':
     - serverbase
