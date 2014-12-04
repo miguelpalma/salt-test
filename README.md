@@ -93,10 +93,16 @@ tasks.
 ## Adding a formula to use
 
 ```
-git submodule add ${GIT_REPO} salt/formula
+git submodule add ${GIT_REPO} salt/formula/${FORMULA_NAME}
 ```
 
 ## TODO
+
+- services to add:
+  - Link `/etc/localtime` to `/usr/share/zoneinfo/Europe/Paris` ??
+  - ntp (use `timedatectl`??)
+  - nagios
+  fail2ban
 
 - See how to automatically include formulas into top.sls as explained [in here](https://git.forgeservicelab.fi/jrodrigu/masterless-formulas/blob/e70e4e11d4c4ec1f66b1374d2335e745f4827bce/ml-wordpress/init.sls)
 - See whether adding external formulas as Git submodules is a good idea as
@@ -108,3 +114,20 @@ git submodule add ${GIT_REPO} salt/formula
 
 - Formula `openssh-formula` only allow setup of one `Port`. Patch at https://github.com/saltstack-formulas/openssh-formula/blob/master/openssh/files/sshd_config#L51  ???
 - Formula `openssh-formula` does not have `subsystem sftp …` in pillar. Patch?
+
+## Usefull resources:
+
+- [Google groups discussion on how to lay files out](https://groups.google.com/forum/#!msg/salt-users/k8tYoBQM_Fo/TtncOjwkBc4J)
+- [Official doc: *pillar setup that enables to promote conf to environments*](http://docs.saltstack.com/en/latest/topics/tutorials/states_pt4.html#environment-configuration)
+
+- if `nagios`:
+
+    ```
+    yum install
+      nagios
+      nagios-plugins-users
+      nagios-plugins-load
+      nagios-plugins-http
+      nagios-plugins-ssh
+    nagiosadmin/nagiosadmin
+    ```
