@@ -36,13 +36,25 @@ tasks.
     # …
     file_client: local    # we are going to run masterless so the minion needs to know salt states are local
     # …
-    file_roots:           # places where the minion can find salt states
+    file_roots:
       base:
-        - /vagrant
+        - /vagrant/salt/base
+      dev:
+        - /vagrant/salt/dev
+        - /vagrant/salt/base
+      prod:
+        - /vagrant/salt/prod
+        - /vagrant/salt/base
     # …                   # 'pillars' are salt files with custom values
     pillar_roots:
       base:
-        - /vagrant/pillar
+        - /vagrant/pillar/base
+      dev:
+        - /vagrant/pillar/dev
+        - /vagrant/pillar/base
+      prod:
+        - /vagrant/pillar/prod
+        - /vagrant/pillar/base
     # …
     # Optional – turn verbosity down:
     state_verbose: False
@@ -61,10 +73,16 @@ tasks.
 
 7. Place your own pillar files in directory `pillar` with the following hierarchy:
 
-  - `pillar/admins.sls`: see `formulas/apache-formula/pillar.example`
-  - `pillar/openssh.sls`: see `formulas/openssh-formula/pillar.example`
+  - `pillar/*/admins.sls`: see `salt/formula/users-formula/pillar.example`
+  - `pillar/*/openssh.sls`: see `salt/formula/openssh-formula/pillar.example`
 
-8. To run the Salt tree:
+8.  Salt uses the minion's id to determine which environment this minion belongs to (`dev`, `prod`).
+    It is thus vital to set it in file `/etc/salt/minion_id` with some string starting with either
+    `dev` or `prod` depending of course in which environment you are currently working on.
+
+    FYI, environments this id will be matched against are declared in `salt/base/top.sls`.
+
+9. Run Salt:
 
     ```
     # This directory is a mount of the Git directory on your local machine
@@ -75,11 +93,7 @@ tasks.
 ## Adding a formula to use
 
 ```
-cd formulas
-git submodule add ${GIT_REPO}
-# Edit /etc/salt/minion to add the following:
-file_roots:
-  - /vagrant/formulas/${FORMULA_REPO_NAME}
+git submodule add ${GIT_REPO} salt/formula
 ```
 
 ## TODO
