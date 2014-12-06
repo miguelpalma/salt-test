@@ -22,14 +22,16 @@ tasks.
     vagrant ssh
     ssh vagrant@localhost -p 2222           # password: 'vagrant'
     ssh vagrant@localhost -p 2222 -i ~/.vagrant.d/insecure_private_key
-    # You should update all installed packages before you do anything else:
+    # User `vagrant` usually has `sudo` passwordless privileges so to become root:
+    sudo -s
+    # You should then update all installed packages before you do anything else:
     yum update
     ```
 
 3. Install *salt minion*: `yum install salt-minion`
 
 4. Edit `/etc/salt/minion` to set the following values (or just copy `/vagrant/conf/etc_salt_minion`
-    to `/etc/salt/minion`. Even better, remove `/etc/salt/minion` and link this path to
+    to `/etc/salt/minion`. Better yet, remove `/etc/salt/minion` and link this path to
     `/vagrant/conf/etc_salt_minion`)
 
     ```
@@ -39,13 +41,7 @@ tasks.
     file_roots:
       base:
         - /vagrant/salt/base
-      dev:
-        - /vagrant/salt/dev
-        - /vagrant/salt/base
-      prod:
-        - /vagrant/salt/prod
-        - /vagrant/salt/base
-    # …                   # 'pillars' are salt files with custom values
+    # 'pillars' are salt files with custom values
     pillar_roots:
       base:
         - /vagrant/pillar/base
@@ -70,6 +66,12 @@ tasks.
 
 6. Optional: if you plan on wiping your VM to test your Salt tree, it would be wise to create a
     snapshot of your VM now so that you will not need to go through these steps anymore.
+    [Vagrant can handle the job for VirtualBox](https://github.com/dergachev/vagrant-vbox-snapshot):
+
+    ```
+    vagrant plugin install vagrant-vbox-snapshot
+    vagrant snapshot take fedora20_salt_updated
+    ```
 
 7. Place your own pillar files in directory `pillar` with the following hierarchy:
 
@@ -93,7 +95,8 @@ tasks.
 ## Adding a formula to use
 
 ```
-git submodule add ${GIT_REPO} salt/formula/${FORMULA_NAME}
+git submodule add ${GIT_REPO} salt/formula/${APP_NAME}
+ln -s ../formula/${APP_NAME}-formula/${APP_NAME} salt/base/${APP_NAME}
 ```
 
 ## TODO
@@ -102,7 +105,11 @@ git submodule add ${GIT_REPO} salt/formula/${FORMULA_NAME}
   - Link `/etc/localtime` to `/usr/share/zoneinfo/Europe/Paris` ??
   - ntp (use `timedatectl`??)
   - nagios
-  fail2ban
+  - fail2ban
+  - monit
+    - system
+    - sshd
+    - fail2ban
 
 - See how to automatically include formulas into top.sls as explained [in here](https://git.forgeservicelab.fi/jrodrigu/masterless-formulas/blob/e70e4e11d4c4ec1f66b1374d2335e745f4827bce/ml-wordpress/init.sls)
 - See whether adding external formulas as Git submodules is a good idea as
@@ -114,6 +121,10 @@ git submodule add ${GIT_REPO} salt/formula/${FORMULA_NAME}
 
 - Formula `openssh-formula` only allow setup of one `Port`. Patch at https://github.com/saltstack-formulas/openssh-formula/blob/master/openssh/files/sshd_config#L51  ???
 - Formula `openssh-formula` does not have `subsystem sftp …` in pillar. Patch?
+- Make this conf common with monit? Is it possible?
+- Formula monit: get *_host_* key paths found in sshd_config from openssh conf
+- Add ability to ship .zshrc etc…
+- Monit formula: add ability to specify other httpd login and connection options
 
 ## Usefull resources:
 
