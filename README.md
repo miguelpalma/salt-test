@@ -95,8 +95,19 @@ tasks.
 ## Adding a formula to use
 
 ```
-git submodule add ${GIT_REPO} salt/formula/${APP_NAME}
+git submodule add ${GIT_REPO} salt/formula/${APP_NAME}-formula
 ln -s ../formula/${APP_NAME}-formula/${APP_NAME} salt/base/${APP_NAME}
+```
+
+## Updating a submodule to latest commit
+
+```
+cd salt/formula/${APP_NAME}-formula
+git pull origin master
+cd ../../..
+git add salt/formula/${APP_NAME}-formula
+git commit -m 'Set ${APP_NAME} to latest commit'
+git submodule update salt/formula/${APP_NAME}-formula
 ```
 
 ## TODO
