@@ -10,3 +10,6 @@
 [submodule "salt/formula/users-formula"]
 	path = salt/formula/users-formula
 	url = https://github.com/saltstack-formulas/users-formula.git
+[submodule "salt/formula/monit-formula"]
+	path = salt/formula/monit-formula
+	url = git@github.com:miguelpalma/saltstack-monit-formula.git
